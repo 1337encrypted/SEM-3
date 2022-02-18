@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>
-int n = 10;
+#define n 10
 int arr[10];
 int front=-1,rear=-1;
 
@@ -12,7 +12,7 @@ bool isEmpty();
 int queueFront();
 int queueRear();
 
-int main()
+int main(void)
 {
 	int ch,temp;
 	while(true)
@@ -30,12 +30,12 @@ int main()
 		switch(ch)
 		{
 			case 1:printf("\nEnter item to be inserted: ");
-				scanf("%d",&temp);
-				if(enqueue(temp))
-					printf("\nItem is inserted\n");
-				else
-					printf("\nQueue overflow\n");
-				break;
+                    scanf("%d",&temp);
+                    if(enqueue(temp))
+                        printf("\nItem is inserted\n");
+                    else
+                        printf("\nQueue overflow\n");
+                    break;
 			
 			case 2:temp=dequeue();
 				if(temp!=-1)
@@ -44,16 +44,16 @@ int main()
 					printf("\nQueue underflow\n");
 				break;
 			
-			case 3:if(isFull)
-					printf("\nQueue is not full\n");
+			case 3:if(isFull())
+					printf("\nQueue is full\n");
 				else 
-					printf("\nQueue is full full\n");
+					printf("\nQueue is not full\n");
 				break;
 				
-			case 4:if(isEmpty)
+			case 4:if(isEmpty())
 					printf("\nQueue is empty\n");
 				else 
-					printf("\nQueue is not full\n");
+					printf("\nQueue is not empty\n");
 				break;
 			
 			case 5:temp=queueFront();
@@ -79,10 +79,10 @@ int main()
 }
 bool enqueue(int temp)
 {
-	if((rear+1)%n == front)
+    if(isEmpty())
+        front=rear=0;
+	else if(((rear+1)%n) == front)
 		return false;
-	else if(isEmpty)
-		front=rear=0;
 	else
 		rear=(rear+1)%n;
 	arr[rear]=temp;
@@ -90,7 +90,7 @@ bool enqueue(int temp)
 }
 int dequeue()
 {
-	if(isEmpty)
+	if(isEmpty())
 		return -1;
 	else if(front==rear)
 		front=rear=-1;
@@ -114,14 +114,14 @@ bool isEmpty()
 }
 int queueFront()
 {
-	if(isEmpty)
+	if(isEmpty())
 		return -1;
 	else
 		return arr[front];
 }
 int queueRear()
 {
-	if(isEmpty)
+	if(isEmpty())
 		return -1;
 	else
 		return arr[rear];
