@@ -60,7 +60,6 @@ bool enQueue(QUEUE *queue, void *dataIn)
 	if(isEmpty(queue))
 	{
 		queue->front = temp;
-		
 	}
 	else
 	{
