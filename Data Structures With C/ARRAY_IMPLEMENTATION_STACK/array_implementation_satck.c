@@ -43,13 +43,13 @@ int main(void)
 				printf("\nStack top: %d", stackTop());
 				break;
 			case 4: 
-				if(isEmpty)
+				if(isEmpty())
 					printf("\nStack is empty");
 				else
 					printf("\nStack is not empty");
 				break;
 			case 5: 
-				if(isFull)
+				if(isFull())
 					printf("\nStack is full");
 				else
 					printf("\nStack is not full");
@@ -67,7 +67,7 @@ int main(void)
 
 void push(int dataIn)
 {
-	if(top == (SIZE-1))
+	if(isFull())
 	{
 		printf("\nStack overflow");
 	}
@@ -80,7 +80,7 @@ void push(int dataIn)
 }
 int pop()
 {
-	if(top == -1)
+	if(isEmpty())
 	{
 		printf("\nStack underflow");
 		return -1;
@@ -91,16 +91,16 @@ int pop()
 bool isFull()
 {
 	if(top == SIZE-1)
-		return 1;
+		return true;
 	else 
-		return 0;
+		return false;
 }
 bool isEmpty()
 {
 	if(top == -1)
-		return 1;
+		return true;
 	else 
-		return 0;
+		return false;
 }
 int stackTop()
 {
