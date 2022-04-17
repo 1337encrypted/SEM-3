@@ -81,7 +81,11 @@ void push(int dataIn)
 int pop()
 {
 	if(top == -1)
+	{
 		printf("\nStack underflow");
+		return -1;
+	}
+		
 	return stack[top--];
 }
 bool isFull()
