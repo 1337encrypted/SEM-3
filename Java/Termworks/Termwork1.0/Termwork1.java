@@ -25,7 +25,7 @@ class student
 
 	public void display()
 	{
-			System.out.println("Name: "+name);
+			System.out.print("Name: "+toString());
 			System.out.println("\nsubject 1: "+sub[0]+"\nsubject 2: "+sub[1]+"\nsubject 3: "+sub[2]);
 			System.out.println("Average: "+average());
 			System.out.println();
@@ -63,7 +63,7 @@ class student
 }
 
 
-class Termwork1bak
+class Termwork1
 {
 	public static void main(String args[])
 	{
