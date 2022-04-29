@@ -1,58 +1,79 @@
-import java.io.*;
-import java.lang.*;
-import java.util.*;
+/*
+1) Write a Java program to accept IA marks obtained by five students in three subjects. The program should accept marks 
+obtained by each student and display the total marks and the average marks. The average marks is computed using a method 
+as the average of best two marks obtained.
+*/
 
+import java.util.Scanner;
 
-class Termwork1{
+class student
+{
+	private double sub[] = new double[3];
+	private double total;
+	private String name;
 
-	public static float averageOfBestTwo(int a,int b,int c)
+	public student()
 	{
-    		float avg=0;
-		if(a>b && a>c)
+		Scanner in = new Scanner(System.in);
+
+		System.out.print("Enter the name of the student: ");		
+		name = in.next();
+		System.out.print("Enter the marks: ");
+		for(int i=0;i<3;i++)
+			sub[i] = in.nextDouble();
+	}
+
+	public void display()
+	{
+			System.out.println("Name: "+name);
+			System.out.println("\nsubject 1: "+sub[0]+"\nsubject 2: "+sub[1]+"\nsubject 3: "+sub[2]);
+			System.out.println("Average: "+average());
+			System.out.println();
+	}
+
+	public double average()
+	{
+		if(sub[0] > sub[1] && sub[0] > sub[2])
 		{
-			if(b>c)
-				return ((a+b)/2);
+			if(sub[1] > sub[2])
+				return (sub[0]+sub[1])/2;
 			else
-				return ((a+c)/2);
+				return (sub[0]+sub[2])/2;
 		}
-		else if(b>a && b>c)
+		else if (sub[1] > sub[2])
 		{
-			if(a>c)
-				return ((a+b)/2);
+			if(sub[2] > sub[0])
+				return (sub[1]+sub[2])/2;
 			else
-				return ((b+c)/2);
+				return (sub[1]+sub[0])/2;
 		}
 		else
 		{
-			if(a>b)
-				return ((c+a)/2);
+			if(sub[1] > sub[0])
+				return (sub[2]+sub[1])/2;
 			else
-				return ((c+b)/2);
+				return (sub[2]+sub[0])/2;
 		}
 	}
-	
-	public static void main(String[]args){
-		Scanner venki = new Scanner(System.in);
 
-		int marks[][]=new int[5][3],total[]=new int[5],i,j,sum=0;
-		float average=0;
-		System.out.print("Enter the student data: ");
-		for(i=0;i<5;i++){
-		    sum=0;
-		    System.out.println("\nStudent : "+(i+1));
-		    for(j=0;j<3;j++){
-		        System.out.println("Subject "+(j+1)+" : ");
-		        marks[i][j]=venki.nextInt();
-		        sum+=marks[i][j];
-		    }
-		    total[i]=sum;
-		}
-		System.out.println("Results - ");
-		for(i=0;i<5;i++){
-		    average = averageOfBestTwo(marks[i][0],marks[i][1],marks[i][2]);
-		    System.out.println("\nStudent "+(i+1));
-		    System.out.println("Total : "+total[i]);
-		    System.out.println("Average : "+average);
-		}
-    }
+	public String toString()
+	{
+		return this.name;
+	}
+}
+
+
+class Termwork1bak
+{
+	public static void main(String args[])
+	{
+		student s[] = new student[5];
+		
+		for(int i=0;i<s.length;i++)
+			s[i] = new student();		
+
+		for(int i=0;i<s.length;i++)
+			s[i].display();
+	
+	}
 }
