@@ -19,6 +19,8 @@ int max(int,int);
 void preOrder(Node*);
 void postOrder(Node*);
 void inOrder(Node*);
+bool isBstUtil(Node*,int,int);
+bool IsBinaryTree(Node*);
 
 Node* createNode(int data)
 {
@@ -142,7 +144,19 @@ void inOrder(Node* root)
 	printf("%d ", root->data);
 	inOrder(root->right);
 }
-
+bool IsBinaryTree(Node *root)
+{
+    return isBstUtil(root,INT_MIN,INT_MAX);
+}
+bool isBstUtil(Node *root, int minVal, int maxVal)
+{
+    if(root == NULL)
+        return  NULL;
+    if(root->data < minVal && root->data > maxVal && isBstUtil(root->left,minVal,root->data) && isBstUtil(root,root->data,maxVal))
+        return true;
+    else
+        return false;
+}
 int main(void)
 {
 	Node *root = NULL;
@@ -159,7 +173,8 @@ int main(void)
 		printf("\t7.Preorder");
 		printf("\t8.Postorder");
 		printf("\t9.Inorder");
-		printf("\t10.Exit");
+        printf("\t10.Binary tree check");
+        printf("\t11.Exit");
 		printf("\nChoose: ");
 		scanf("%d", &ch);
 		
@@ -202,7 +217,13 @@ int main(void)
 			case 9: inOrder(root);
 				printf("\n");
 				break;		 
-			case 10: exit(0);
+            case 10:
+                if(IsBinaryTree(root))
+                    printf("Its a binary tree");
+                else
+                    printf("Its not a binary tree");
+                break;
+            case 11: exit(0);
 			default: printf("\nInvalid case\n");
 		}
 	}
