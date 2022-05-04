@@ -1,93 +1,136 @@
 // TW 8 BST
 
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
 
-typedef struct node
+typedef struct Node
 {
-    int data;
-    struct node *left, *right;
-}NODE;
+    char data;
+    struct Node *right;
+    struct Node *left;
+}Node;
 
+Node* createNode(int);
+Node* insert(Node *, int);
+int leafNodes(Node *);
+int nonLeafNodes(Node *);
+int twoDegreeNodes(Node *);
+int totalNodes(Node *);
+Node* deleteNodes(Node *);
 
-NODE* newNode(int item)
+Node* createNode(int data)
 {
-    NODE *tmp = (NODE *)malloc(sizeof(NODE));
-    tmp->data=item;
-    tmp->left=tmp->right=NULL;
+    Node *tmp = (Node*)malloc(sizeof(Node));
+    if(tmp == NULL)
+    {
+        printf("\nMalloc failure");
+        return NULL;
+    }
+    tmp->data = data;
+    tmp->right = tmp->left = NULL;
     return tmp;
 }
 
-NODE* addBST(NODE* root, int key)
+Node* insert(Node *root, int data)
 {
-    if(root==NULL)
-        return newNode(key);
-    if(key<root->data)
-        root->left=addBST(root->left, key);
-    else
-        root->right=addBST(root->right, key);
+    if(root == NULL)
+    {
+        root = createNode(data);
+    }
+    else if(data < root->data)
+    {
+        root->left = insert(root->left,data);
+    }
+    else if(data > root->data)
+    {
+        root->right = insert(root->right,data);
+    }
     return root;
 }
 
-
-int leaf(NODE* root)
+int leafNodes(Node *root)
 {
-    if(root==NULL)
+    if(root != NULL)
+    {
+        if(root->left == NULL && root->right == NULL)
+            return 1;
+        else
+        {
+            return leafNodes(root->left)+leafNodes(root->right);
+        }
+    }
+    else
         return 0;
-    if(root->left==NULL && root->right==NULL)
-        return 1;
-    return leaf(root->left)+leaf(root->right);
 }
-
-
-int nonleaf(NODE* root)
+int nonLeafNodes(Node *root)
 {
-    if(root==NULL)
+    if(root == NULL)
         return 0;
-    if(root->left==NULL && root->right==NULL)
+    else if(root->left == NULL && root->right == NULL)
         return 0;
-    return 1+nonleaf(root->left)+nonleaf(root->right);
+    else
+        return 1+nonLeafNodes(root->left)+nonLeafNodes(root->right);
 }
-
-
-int two(NODE* root)
+int twoDegreeNodes(Node *root)
 {
-    if(root==NULL)
+    if(root == NULL)
+    {
         return 0;
-    if(root->left!=NULL && root->right!=NULL)
-        return 1+two(root->left)+two(root->right);
-    if(root->left==NULL)
-        return two(root->right);
-    if(root->right==NULL)
-        return two(root->left);
+    }
+    else if(root->left != NULL && root->right != NULL)
+    {
+        return 1+twoDegreeNodes(root->left)+twoDegreeNodes(root->right);
+    }
+    else if(root->left != NULL)
+    {
+        return twoDegreeNodes(root->left);
+    }
+    else if(root->right != NULL)
+    {
+        return twoDegreeNodes(root->right);
+    }
     return 0;
 }
 
-
-int total(NODE* root)
+Node* deleteNodes(Node *root)
 {
-    if(root==NULL)
-        return 0;
-    return 1+total(root->left)+total(root->right);
+    if(root == NULL)
+        return NULL;
+    root->left = deleteNodes(root->left);
+    root->right = deleteNodes(root->right);
+    printf("\nDeleted: %d", root->data);
+    free(root);
+    return root;
 }
 
-
-int main()
+int totalNodes(Node *root)
 {
-    int i,n,key;
-    NODE *root=NULL;
-    printf("\nEnter the number n: ");
+    if(root == NULL)
+        return 0;
+    return 1+totalNodes(root->left)+totalNodes(root->right);
+}
+
+int main(void)
+{
+    int n,i,data;
+    Node *root=NULL;
+    printf("\nEnter the number of nodes: ");
     scanf("%d", &n);
+
+    printf("\nEnter the elements");
     for(i=0;i<n;i++)
     {
-        printf("\nEnter int %d: ", i+1);
-        scanf("%d", &key);
-        root=addBST(root, key);
+        printf("\nEnter the element %d: ",i+1);
+        scanf("%d", &data);
+        root = insert(root,data);
     }
-
-    printf("\nNo of leaf nodes: %d", leaf(root));
-    printf("\nNo of non-leaf nodes: %d", nonleaf(root));
-    printf("\nNo of nodes with degree two: %d", two(root));
-    printf("\nTotal no of nodes: %d\n", total(root));
+    
+    printf("\nNumber of leaf nodes: %d", leafNodes(root));
+    printf("\nNumber of non leaf nodes: %d", nonLeafNodes(root));
+    printf("\nNumber of nodes having two out degree: %d", twoDegreeNodes(root));
+    printf("\nTotal number of nodes: %d", totalNodes(root));
+    
+    root = deleteNodes(root);
+    printf("\n");
     return 0;
 }

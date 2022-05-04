@@ -54,9 +54,9 @@ int main()
     char one[15][15], two[15][15];
     int m=0,n=0;
 
-	f1=fopen("C:\\Users\\manju\\Desktop\\C Pgms\\Unit 1\\first.txt", "r");
-    f2=fopen("C:\\Users\\manju\\Desktop\\C Pgms\\Unit 1\\second.txt", "r");
-    f3=fopen("C:\\Users\\manju\\Desktop\\C Pgms\\Unit 1\\third.txt", "w");
+	f1=fopen("./first.txt", "r");
+    f2=fopen("./second.txt", "r");
+    f3=fopen("./third.txt", "w");
 
 	if(f1==NULL || f2==NULL || f3==NULL)
     {

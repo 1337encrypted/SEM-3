@@ -2,26 +2,27 @@
  * polynomial are stored using structure
  * and program uses array of structures
  */
+
 #include<stdio.h>
 
  /* declare structure for polynomial */
- struct poly
- {
-	 int coeff;
-	 int expo;
- };
+
+typedef struct poly
+{
+    int coeff;
+    int expo;
+}poly;
 
 
  /* function prototypes */
- int readPoly(struct poly []);
- int addPoly(struct poly [],struct poly [],int ,
-             int ,struct poly []);
- void displayPoly( struct poly [],int terms);
+ int readPoly(poly []);
+ int addPoly(poly [],poly [],int ,int ,poly []);
+ void displayPoly( poly [],int terms);
 
  int main()
  {
 	int t1,t2,t3;
-	struct poly p1[10],p2[10],p3[10];
+	poly p1[10],p2[10],p3[10];
 
 	
 	t1=readPoly(p1);
@@ -41,22 +42,23 @@
 	return 0;
  }
 
- int readPoly(struct poly p[10])
+ int readPoly(poly p[10])
  {
 	int t1,i;
 	printf("\n\n Enter the total number of terms in the polynomial:");
 	scanf("%d",&t1);
 	printf("\n Enter the COEFFICIENT and EXPONENT in DESCENDING ORDER\n");
-	for(i=0;i<t1;i++){
-		printf("   Enter the Coefficient(%d): ",i+1);
+	for(i=0;i<t1;i++)
+    {
+		printf("\nEnter the Coefficient(%d): ",i+1);
 		scanf("%d",&p[i].coeff);
-		printf("      Enter the exponent(%d): ",i+1);
+		printf("\nEnter the exponent(%d): ",i+1);
 		scanf("%d",&p[i].expo);        /* only statement in loop */
 	}
 	return(t1);
  }
 
- int addPoly(struct poly p1[10],struct poly p2[10],int t1,int t2,struct poly p3[10])
+ int addPoly(poly p1[10],poly p2[10],int t1,int t2,poly p3[10])
  {
 	int i,j,k;
 
@@ -109,10 +111,9 @@
 	return(k); 
  }
 
- void displayPoly(struct poly p[10],int term)
+ void displayPoly(poly p[10],int term)
  {
 	int k;
-
 	for(k=0;k<term-1;k++)
         printf("%d(x^%d)+",p[k].coeff,p[k].expo);
 	printf("%d(x^%d)",p[term-1].coeff,p[term-1].expo);

@@ -12,25 +12,25 @@ typedef struct node
 
 //Prototypes
 void Sender(NODE **, NODE **, char *);
-char * Receiver(NODE **, NODE **);
+char* Receiver(NODE **, NODE **);
 void DispQ(NODE *);
 
 
 int main()
 {
-    NODE *front, *rear;
+    //Create an empty Queue
+
+    NODE *front = NULL;
+    NODE *rear = NULL;
     int opt;
     char *msg;
     msg=(char *)malloc(50);
     if(msg==NULL)
     {
         printf("\nMalloc failure");
-        exit(4);
+        exit(1);
     }
-
-    //Create an empty Queue
-    front=rear=NULL;
-
+    
     while(1)
     {
         printf("\n1: Send a message");
@@ -41,19 +41,20 @@ int main()
         scanf("%d", &opt);
         switch(opt)
         {
-            case 1: printf("\nEnter the message: ");
+        case 1: printf("\nEnter the message: ");
                     scanf("%s", msg);
                     Sender(&front, &rear, msg);
                     break;
 
          case 2:  strcpy(msg,Receiver(&front, &rear));
-                  if(strcmp(msg, "Queue underflow")==0)
+                  if(strcmp(msg,"Queue underflow")==0)
                     printf("\n%s", msg);
                   else
                     printf("\nReceived message is: %s\n", msg);
                   break;
 
-         case 3: DispQ(front); break;
+         case 3: DispQ(front);
+                break;
          case 4: exit(0);
         }
     }
@@ -61,7 +62,7 @@ int main()
     return 0;
 }
 
-void Sender(NODE **front, NODE **rear, char * item)
+void Sender(NODE **front, NODE **rear, char *item)
 {
     NODE *tmp=(NODE *)malloc(sizeof(NODE));
     if(tmp==NULL)
@@ -71,11 +72,13 @@ void Sender(NODE **front, NODE **rear, char * item)
     }
 
     tmp->msg=(char *)malloc(sizeof(item));
+    
     if(tmp->msg==NULL)
     {
         printf("\nMalloc failure");
         exit(2);
     }
+    
     strcpy(tmp->msg, item);
     tmp->next=NULL;
 
@@ -91,10 +94,10 @@ void Sender(NODE **front, NODE **rear, char * item)
 
 
 
-char * Receiver(NODE **front, NODE **rear)
+char* Receiver(NODE **front, NODE **rear)
 {
-    char * item;
-    NODE *tmp=*front;
+    char* item;
+    NODE *tmp = *front;
 
     if(*front==NULL)
     {
@@ -103,14 +106,15 @@ char * Receiver(NODE **front, NODE **rear)
     }
 
     item=(char *)malloc(sizeof((*front)->msg));
+    
     if(item==NULL)
     {
         printf("\nMalloc failure");
         exit(3);
     }
+    
     strcpy(item, (*front)->msg);
     *front=(*front)->next;
-
 
     if(*front==NULL)
         rear=NULL;

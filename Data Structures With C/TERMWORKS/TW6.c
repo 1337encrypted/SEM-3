@@ -61,8 +61,8 @@ NODE* add(NODE* head, int item)
     // Case i - List is empty
     if(head==NULL)
         head=newnode;
-    else // Case ii - adding the smallest item
-        if(item < head->data)
+     // Case ii - adding the smallest item
+    else if(item < head->data)
         {
               newnode->next = head;
               head = newnode;
