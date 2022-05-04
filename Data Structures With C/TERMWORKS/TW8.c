@@ -10,6 +10,7 @@ typedef struct Node
     struct Node *left;
 }Node;
 
+//Prototypes
 Node* createNode(int);
 Node* insert(Node *, int);
 int leafNodes(Node *);
@@ -53,7 +54,9 @@ int leafNodes(Node *root)
     if(root != NULL)
     {
         if(root->left == NULL && root->right == NULL)
+        {
             return 1;
+        }
         else
         {
             return leafNodes(root->left)+leafNodes(root->right);
@@ -65,11 +68,17 @@ int leafNodes(Node *root)
 int nonLeafNodes(Node *root)
 {
     if(root == NULL)
+    {
         return 0;
+    }
     else if(root->left == NULL && root->right == NULL)
+    {
         return 0;
+    }
     else
+    {
         return 1+nonLeafNodes(root->left)+nonLeafNodes(root->right);
+    }
 }
 int twoDegreeNodes(Node *root)
 {
@@ -92,10 +101,12 @@ int twoDegreeNodes(Node *root)
     return 0;
 }
 
-Node* deleteNodes(Node *root)
+Node* deleteNodes(Node *root)   //Postorder deletion
 {
     if(root == NULL)
+    {
         return NULL;
+    }
     root->left = deleteNodes(root->left);
     root->right = deleteNodes(root->right);
     printf("\nDeleted: %d", root->data);
@@ -106,7 +117,9 @@ Node* deleteNodes(Node *root)
 int totalNodes(Node *root)
 {
     if(root == NULL)
+    {
         return 0;
+    }
     return 1+totalNodes(root->left)+totalNodes(root->right);
 }
 
@@ -130,7 +143,7 @@ int main(void)
     printf("\nNumber of nodes having two out degree: %d", twoDegreeNodes(root));
     printf("\nTotal number of nodes: %d", totalNodes(root));
     
-    root = deleteNodes(root);
+    root = deleteNodes(root);   //deletes all nodes and return NULL
     printf("\n");
     return 0;
 }
