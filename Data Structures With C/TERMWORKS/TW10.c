@@ -6,47 +6,18 @@
 typedef struct node
 {
     int data;
-    struct node *next, *prev;
+    struct node *next;
+    struct node *prev;
 }NODE;
 
 //Prototypes
-NODE* addFront(NODE*);
-NODE* addRear(NODE*);
+void addFront(NODE**,NODE**);
+void addRear(NODE**,NODE**);
 void disp(NODE*);
 void search(NODE*);
+void deleteNodes(NODE*);
 
-//Driver
-int main()
-{
-    NODE *head=NULL;
-    int opt;
-    while(1)
-    {
-        printf("\n1:FrontAdd");
-        printf("\n2:RearAdd");
-        printf("\n3:Display");
-        printf("\n4:Search");
-        printf("\n5:Exit");
-        printf("\nChoose: ");
-        scanf("%d", &opt);
-        switch(opt)
-        {
-            case 1: head=addFront(head);
-            	    break;
-            case 2: head=addRear(head);
-            	    break;
-            case 3: disp(head);
-            	    break;
-            case 4: search(head);
-            	    break;
-            case 5: exit(0);
-        }
-    }
-    return 0;
-}
-
-
-NODE* addFront(NODE *head)
+void addFront(NODE **head, NODE **tail)
 {
     int data;
     NODE *tmp=(NODE *)malloc(sizeof(NODE));
@@ -61,16 +32,46 @@ NODE* addFront(NODE *head)
     tmp->data=data;
     tmp->prev=tmp->next=NULL;
 
-    if(head==NULL)
-        head=tmp;
+    if(*head==NULL && *tail == NULL)
+    {
+        *head = tmp;
+        *tail = tmp;
+    }
     else
     {
-        tmp->next=head;
-        head->prev=tmp;
-        head=tmp;
+        tmp->next=(*head);
+        (*head)->prev=tmp;
+        (*head)=tmp;
+    }
+}
+
+void addRear(NODE **head, NODE **tail)
+{
+    int data;
+    //NODE *trav;
+    NODE *tmp=(NODE *)malloc(sizeof(NODE));
+    if(tmp==NULL)
+    {
+        printf("\nMalloc failure");
+        exit(1);
     }
 
-    return(head);
+    printf("\nEnter data to add: ");
+    scanf("%d", &data);
+    tmp->data=data;
+    tmp->prev=tmp->next=NULL;
+
+    if(*head==NULL && *tail==NULL) //Empty List
+    {
+        *head = tmp;
+        *tail = tmp;
+    }
+    else 
+    {
+        (*tail)->next=tmp;
+        tmp->prev=(*tail);
+        *tail = tmp;
+    }
 }
 
 void disp(NODE *head)
@@ -87,37 +88,6 @@ void disp(NODE *head)
         printf("%d    ", head->data);
         head=head->next;
     }
-}
-
-NODE* addRear(NODE *head)
-{
-    int data;
-    NODE *trav;
-    NODE *tmp=(NODE *)malloc(sizeof(NODE));
-    if(tmp==NULL)
-    {
-        printf("\nMalloc failure");
-        exit(1);
-    }
-
-    printf("\nEnter data to add: ");
-    scanf("%d", &data);
-    tmp->data=data;
-    tmp->prev=tmp->next=NULL;
-
-    if(head==NULL) //Empty List
-        head=tmp;
-    else 
-    {
-        trav=head;
-        while(trav->next)
-            trav=trav->next;
-
-        trav->next=tmp;
-        tmp->prev=trav;
-    }
-
-    return(head);
 }
 
 
@@ -147,4 +117,50 @@ void search(NODE *head)
 
     printf("\nData %d not present", item);
 
+}
+
+void deleteNodes(NODE* head)
+{
+    NODE *tmp = head;
+    
+    while(head != NULL)
+    {
+        head=head->next;
+        printf("\nDeleted: %d", tmp->data);
+        free(tmp);
+        tmp=head;
+    }
+}
+
+//Driver
+int main()
+{
+    NODE *head=NULL;
+    NODE *tail=NULL;
+    int opt;
+    while(1)
+    {
+        printf("\n1:FrontAdd");
+        printf("\n2:RearAdd");
+        printf("\n3:Display");
+        printf("\n4:Search");
+        printf("\n5:Exit");
+        printf("\nChoose: ");
+        scanf("%d", &opt);
+        switch(opt)
+        {
+            case 1: addFront(&head,&tail);
+                    break;
+            case 2: addRear(&head,&tail);
+                    break;
+            case 3: disp(head);
+                    break;
+            case 4: search(head);
+                    break;
+            case 5: deleteNodes(head);
+                    printf("\nAll nodes deleted successfully\n");
+                    exit(0);
+        }
+    }
+    return 0;
 }

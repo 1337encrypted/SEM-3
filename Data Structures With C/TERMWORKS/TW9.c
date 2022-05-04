@@ -88,7 +88,7 @@ Node* pop()
 int main(void)
 {
     char s[30];
-    Node *root;
+    Node *root = NULL;
     int i,l;
     
     printf("\nEnter the postfix expression: ");
