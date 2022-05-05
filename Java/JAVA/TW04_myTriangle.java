@@ -49,7 +49,7 @@ class myTriangle
 	}
 }
 
-class TW4_myTriangle
+class TW04_myTriangle
 {
 	public static void main(String args[])
 	{

@@ -43,7 +43,7 @@ class myCircle
 	}
 }
 
-class TW5_myCircle
+class TW05_myCircle
 {
 	public static void main(String args[])
 	{

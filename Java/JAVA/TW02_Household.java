@@ -10,7 +10,7 @@ Demonstrate how you would use a two dimensional matrix to help Mr. X.
 
 import java.util.Scanner;
 
-class TW2_Household {
+class TW02_Household {
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
     

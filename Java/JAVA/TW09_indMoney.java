@@ -51,7 +51,7 @@ class indMoney
 	}
 }
 
-class TW9_indMoney
+class TW09_indMoney
 {
 	public static void main(String args[])
 	{

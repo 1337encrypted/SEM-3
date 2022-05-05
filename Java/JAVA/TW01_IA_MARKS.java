@@ -3,7 +3,7 @@
 */
 
 import java.util.Scanner;
-public class TW1_IA_MARKS {
+public class TW01_IA_MARKS {
     public static void main(String[] args){
         int[][] marks=new int[5][3];
         int[] total = {0,0,0,0,0};

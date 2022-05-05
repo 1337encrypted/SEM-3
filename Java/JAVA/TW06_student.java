@@ -38,7 +38,7 @@ class student
 	}
 }
 
-class TW6_student
+class TW06_student
 {
 	public static void main(String args[])
 	{

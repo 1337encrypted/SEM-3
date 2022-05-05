@@ -42,7 +42,7 @@ class complex
 	}
 }
 
-class TW8_complex
+class TW08_complex
 {
 	public static void main(String args[])
 	{

@@ -8,7 +8,8 @@
 import java.io.*;
 import java.lang.*;
 import java.util.*;
-class TW3_zonalSales
+
+class TW03_zonalSales
 {
 	static int maximum(int a[])
 	{

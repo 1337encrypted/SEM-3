@@ -91,7 +91,7 @@ class mybankAccount
 	}
 }
 
-class TW7_mybankAccount
+class TW07_mybankAccount
 {
 	public static void main(String args[])
 	{
