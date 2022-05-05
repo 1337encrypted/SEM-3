@@ -50,7 +50,7 @@ void InsHT_LP(struct Customer cust, struct Record ht[])
 	int key = cust.custid;
 	temp = HashFn(key);				
 	pos = temp;	
-	for(count = 1; count <= SIZE    ; count++)
+	for(count = 1; count <= SIZE ; count++)
 	{
 		if(ht[pos].empty == 1)
 		{
@@ -101,11 +101,11 @@ int main()
 	}	
 	while(1)
 	{
-		printf("\n\n1. Insert a Record\n");
-		printf("2. Search a Record\n");
-		printf("3. Display All Records\n");
-		printf("4. Exit\n");
-		printf("\n Enter Your Option:");
+		printf("\n\n1. Insert a Record");
+		printf("\n2. Search a Record");
+		printf("\n3. Display All Records");
+		printf("\n4. Exit");
+		printf("\nEnter Your Option:");
 		scanf("%d", &option);
 		switch(option)
 		{
