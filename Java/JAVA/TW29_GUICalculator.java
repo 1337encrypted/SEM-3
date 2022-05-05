@@ -14,8 +14,8 @@ public class TW29_GUICalculator extends JFrame implements ActionListener{
     JLabel lb1,lb2,lb3;
     JTextField num1,num2,num3;
     JButton b1,b2,b3,b4;
-    TW29_GUICalculator{
-        this.setTitle("My first GUI");
+    TW29_GUICalculator(){
+        this.setTitle("CALCULATOR");
         this.setSize(400,400);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLayout(null);
@@ -66,7 +66,7 @@ public class TW29_GUICalculator extends JFrame implements ActionListener{
         this.setVisible(true);
     }
     public static void main(String[] args){
-        new Tw10();
+        new TW29_GUICalculator();
     }
 
     @Override
