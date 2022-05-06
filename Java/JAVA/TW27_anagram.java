@@ -1,5 +1,8 @@
 /*
-27). Two strings will be anagram to each other if and only if they contain the same number of characters (order of the characters doesn't matter). That is, If the two strings are anagram to each other, then one string can be rearranged to form the other string. For Example: creative and reactive are anagrams. Write a Java program to test whether two strings are anagrams or not. (listen and silent, stressed and desserts, dusty and study).
+27). Two strings will be anagram to each other if and only if they contain the same number of characters (order of the characters doesn't
+ matter). That is, If the two strings are anagram to each other, then one string can be rearranged to form the other string. For Example
+ creative and reactive are anagrams. Write a Java program to test whether two strings are anagrams or not. (listen and silent, stressed and
+ desserts, dusty and study).
 */
 
 import java.util.*;

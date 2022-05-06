@@ -13,11 +13,11 @@ class book
 
     book(int id,  String title, String author, String genre, String publisher)
     {
-          this.id = id;
-          this.title = title;
-          this.author = author;
-          this.genre = genre;
-          this.publisher = publisher;
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
+        this.publisher = publisher;
     }
 }
 
@@ -25,84 +25,84 @@ class TW28_bookDatabase
 {
     public static void main(String[] args)
     {
-          book[] b = new book[4];
-        
-            b[0] = new book(101, "Java Programming", "james Gosling", "Technical", "PHI");
-          b[1] = new book(102, "Java Made Easy", "Dennis Ritchie", "Technical", "MIT");
-          b[2] = new book(103, "Programming with C", "Balaguruswamy", "Technical", "VTU");
-          b[3] = new book(104, "Programming with C++", "Balaguruswamy", "Technical", "PHI");
-        
+        book[] b = new book[4];
+
+        b[0] = new book(101, "Java Programming", "james Gosling", "Technical", "PHI");
+        b[1] = new book(102, "Java Made Easy", "Dennis Ritchie", "Technical", "MIT");
+        b[2] = new book(103, "Programming with C", "Balaguruswamy", "Technical", "VTU");
+        b[3] = new book(104, "Programming with C++", "Balaguruswamy", "Technical", "PHI");
+
         System.out.println();
         if(checkTitle(b,"Fun with Python"))
-                System.out.println("The title exits in the database");
-           else
-                System.out.println("The title does not exits in the database");
+            System.out.println("The title exits in the database");
+        else
+            System.out.println("The title does not exits in the database");
         System.out.println();
 
-            checkDetails(b, "Java");
+        checkDetails(b, "Java");
         System.out.println();
 
-          checkGenres(b, "Technical");
+        checkGenres(b, "Technical");
         System.out.println();
 
-         listAuthors(b, 'D');
+        listAuthors(b, 'D');
         System.out.println();
 
-    }
-
-    public static boolean checkTitle(book books[], String title)
-    {
-        for(book i : books)
-            if(i.title.equals(title))
-                return true;
-        return false;
-    }
-
-    public static void checkDetails(book books[], String str)
-    {
-        int count = 0;
-        System.out.println(str + " appears in the following titles: ");
-        for(book i : books)
-        {
-            if(i.title.indexOf(str) != -1)
-            {
-                System.out.println(i.title);
-                count++;
-            }
         }
-        if(count == 0)
-            System.out.println("Not Found");
-    }
 
-    public static void checkGenres(book books[], String genre)
-    {
-        int count = 0;
-        System.out.println("Following publishers have published books on " + genre + ":");
-        for(book i : books)
+        public static boolean checkTitle(book books[], String title)
         {
-            if(i.genre.equals(genre))
-            {
-                System.out.println(i.publisher);
-                count++;
-            }
+            for(book i : books)
+                if(i.title.equals(title))
+                    return true;
+            return false;
         }
-        if(count == 0)
-            System.out.println("Not Found");
-    }
 
-    public static void listAuthors(book books[], char c)
-    {
-        int count = 0;
-        System.out.println("Auhtors whose names start with "+c+":");
-        for(book i : books)
+        public static void checkDetails(book books[], String str)
         {
-            if(i.author.charAt(0) == c)
+            int count = 0;
+            System.out.println(str + " appears in the following titles: ");
+            for(book i : books)
             {
-                System.out.println(i.publisher);
-                count++;
+                if(i.title.indexOf(str) != -1)
+                {
+                    System.out.println(i.title);
+                    count++;
+                }
             }
+            if(count == 0)
+                System.out.println("Not Found");
         }
-        if(count == 0)
-            System.out.println("Not Found");
-    }
+
+        public static void checkGenres(book books[], String genre)
+        {
+            int count = 0;
+            System.out.println("Following publishers have published books on " + genre + ":");
+            for(book i : books)
+            {
+                if(i.genre.equals(genre))
+                {
+                    System.out.println(i.publisher);
+                    count++;
+                }
+            }
+            if(count == 0)
+                System.out.println("Not Found");
+        }
+
+        public static void listAuthors(book books[], char c)
+        {
+            int count = 0;
+            System.out.println("Auhtors whose names start with "+c+":");
+            for(book i : books)
+            {
+                if(i.author.charAt(0) == c)
+                {
+                    System.out.println(i.publisher);
+                    count++;
+                }
+            }
+            if(count == 0)
+                System.out.println("Not Found");
+        }
 }
