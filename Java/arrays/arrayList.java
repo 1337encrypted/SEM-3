@@ -3,7 +3,7 @@ public class arrayList
 {
 	public static void main(String args[])
 	{
-		arraylist <Integer> arr = new arrayList<Integer>();
+		arraylist<Integer> arr = new arrayList<Integer>();
 		for(int i=0; i<args.length-2;i++)
 			arr.add(Integer.parseInt(args[i]));
 		int ele = Integer.arseInt(args[0]);
