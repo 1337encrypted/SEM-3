@@ -1,63 +1,46 @@
-class mergeSortalgorithm
-{
-	public static void main(String args[])
-	{
-		int arr[] = {6,5,4,3,5,6,7,8};
-		mergeSort(arr,0,arr.length);
-		for(int x : arr)
-			System.out.print(x+"\t");
+class mergeSortalgorithm {
+	public static void main(String args[]) {
+		int arr[] = new int[args.length];
+		for (int i=0;i<args.length;i++)
+			arr[i] = Integer.parseInt(args[i]);
+		mergeSort(arr, 0, arr.length-1);
+		for (int x : arr)
+			System.out.print(x + "\t");
+		System.out.println();
 	}
-	
-	public static int[] mergeSort(int arr[], int low, int high)
-	{
-		if(low < high)
-		{
-			//int mid = low + (high-low)/2;
-			int mid = (low+high);
-			mergeSort(arr,low,high);
-			mergeSort(arr,mid+1,high);
-			merge(arr,low,mid,high);
+
+	static void merge(int arr[], int low, int mid, int high) {
+		int n1 = mid - low + 1, n2 = high - mid;
+		int left[] = new int[n1];
+		int right[] = new int[n2];
+
+		for (int i = 0; i < n1; i++)
+			left[i] = arr[low + i];
+		for (int j = 0; j < n2; j++)
+			right[j] = arr[mid + j + 1];
+
+		int i = 0, j = 0, k = low;
+		while (i < n1 && j < n2) {
+			if (left[i] <= right[j]) {
+				arr[k++] = left[i++];
+			} else {
+				arr[k++] = right[j++];
+			}
+		}
+		while (i < n1) {
+			arr[k++] = left[i++];
+		}
+		while (j < n2) {
+			arr[k++] = right[j++];
 		}
 	}
-	
-	public static void merge(int arr[], int low, int mid, int high)
-	{
-		int arr1[] = new int[arr.length];
-		//int arr2[] = new int[high-mid+1];
-		
-		//for(int i=0;i<arr1.length;i++)
-		//	arr1[i]=arr[low+i];
-		//for(int j=0;j<arr2.length;j++)
-		//	arr2[j]=arr[mid+1+j];
-		
-			
-		int i=0,j=0,k=low;
-		while(i<mid && j<high)
-		{
-			if(arr[i]<=arr[j])
-			{
-				arr1[k]=arr[i];
-				i++;
-				k++;
-			}	
-			else
-			{
-				arr1[k]=arr[j];
-				j++;
-				k++;
-			}	
-		}
-		while(i<mid)
-		{
-			arr1[k]=arr[i];
-			i++;
-			k++;
-		}
-		while(j<high)
-		{
-			arr1[k]=arr[j];
-			j++;
-			k++;
+
+	static void mergeSort(int arr[], int low, int high) {
+		if (low < high) {
+			int mid = low+(high-low)/2;
+			mergeSort(arr, low, mid);
+			mergeSort(arr, mid + 1, high);
+			merge(arr, low, mid, high);
 		}
 	}
 }
